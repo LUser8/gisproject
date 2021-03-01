@@ -27,4 +27,29 @@ require([
     })
 
     map.layers.add(transportationLayer)
+
+     // Create a variable referencing the checkbox node
+     var streetsLayerToggle = document.getElementById("streetsLayer");
+
+     // Listen to the change event for the checkbox
+     streetsLayerToggle.addEventListener("change", function() {
+     // When the checkbox is checked (true), set the layer's visibility to true
+     transportationLayer.visible = streetsLayerToggle.checked;
+     });
+
+    view.on('layerview-create', function(event){
+        if (event.layer.id === "ny-housing") {
+          // Explore the properties of the housing layer's layer view here
+          console.log("LayerView for New York housing density created!", event.layerView);
+        }
+        if (event.layer.id === "streets") {
+          // Explore the properties of the transportation layer's layer view here
+          console.log("LayerView for streets created!", event.layerView);
+        }
+    });
+
+    // When the layer's promise resolves, animate the view to the layer's fullExtent
+    housingLayer.when(function() {
+      view.goTo(housingLayer.fullExtent);
+    });
 });
