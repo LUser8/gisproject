@@ -1,0 +1,34 @@
+{% extends 'hypergis/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-4 border" style="height:600px">
+        <div class="card mw-100">
+          <div class="card-body">
+            <h5 class="card-title">Farmer</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Farmer Name</h6>
+          </div>
+        </div>
+        <form method="post" class="mt-5">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                {{form|crispy}}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn button-outline-info" type="submit">Register the new field</button>
+            </div>
+        </form>
+        </div>
+    <div class="col-sm-8 border" style="height:600px">
+        <div></div>
+        <div id="viewDiv"></div>
+    </div>
+  </div>
+</div>
+<div class="row">
+    <div class="col-sm">
+        <a href="{% url 'register-field' %}" class="btn btn-outline-dark d-block m-3" role="button" aria-pressed="true">Register the new field</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,90 @@
+{% extends 'hypergis/base.html' %}
+{% block head %}
+    <style>
+          #viewDiv {
+            height: 85%;
+            width: 100%;
+            margin-left: 0rem!important;
+            margin-top: 5rem!important;
+            border: 3px solid black;
+          }
+    </style>
+    <link rel="stylesheet" href="https://js.arcgis.com/4.18/esri/themes/light/main.css">
+    <script src="https://js.arcgis.com/4.18/"></script>
+
+    <script>
+      require(["esri/config", "esri/Map", "esri/views/MapView"], function(esriConfig, Map, MapView){
+            esriConfig.apiKey = "AAPK02da015eace04b4e9907e38d261b4fe0jFOsilMKpbnUNqY2Gs2L_H9QieuIPqgMJRx83Bp3HHir-u26sZvJ3adIgu12PQI-";
+            var map = new Map({
+                basemap: "osm-standard"
+            });
+            var view = new MapView({
+                container: "viewDiv",
+                map: map,
+                zoom: 3,
+                center: [15, 54]
+            })
+        });
+    </script>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-4 border" style="height:700px">
+        <div class="card mw-100">
+          <div class="card-body">
+            <h5 class="card-title">Farmer</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Farmer Name</h6>
+          </div>
+        </div>
+
+
+        <div class="dropdown m-5">
+            <div class="row">
+                <div class="col"><label>Field Name: </label></div>
+                <div class="col">
+<!--                  <button class="btn btn-secondary dropdown-toggle" type="button" id="id_field_name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+<!--                    Dropdown button-->
+<!--                  </button>-->
+<!--                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">-->
+<!--                    <a class="dropdown-item" href="#">Action</a>-->
+<!--                    <a class="dropdown-item" href="#">Another action</a>-->
+<!--                    <a class="dropdown-item" href="#">Something else here</a>-->
+<!--                  </div>-->
+                    <select name="farm_field" id="id_farmField">
+                        <option value="volvo">Volvo</option>
+                        <option value="saab">Saab</option>
+                        <option value="opel">Opel</option>
+                        <option value="audi">Audi</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="dropdown m-5">
+            <div class="row">
+                <div class="col"><label>Date: </label></div>
+                <div class="col">
+                  <select name="flight_dates" id="id_flight_date">
+                        <option value="volvo">Volvo</option>
+                        <option value="saab">Saab</option>
+                        <option value="opel">Opel</option>
+                        <option value="audi">Audi</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top:18rem;">
+            <a href="{% url 'register-field' %}" class="btn btn-outline-dark d-block m-3" role="button" aria-pressed="true">register new field</a>
+            <a href="{% url 'flight-upload' %}" class="btn btn-outline-dark d-block m-3" role="button" aria-pressed="true">upload new flight data</a>
+        </div>
+    </div>
+    <div class="col-sm-8 border" style="height:700px">
+        <div></div>
+        <div id="viewDiv"></div>
+    </div>
+  </div>
+</div>
+{% endblock %}
